@@ -41,8 +41,8 @@ public class RaptorEditor extends FormEditor implements IResourceChangeListener{
   protected void addPages() {
     // TODO Auto-generated method stub
     try {
-      addPage(new FormView(this));
-      int index = addPage(new Composite(getContainer(), SWT.NULL));
+      int indexFormView = addPage(new FormView(this));
+      
       
     } catch (PartInitException e) {
       // TODO: handle exception
