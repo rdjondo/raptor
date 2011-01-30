@@ -4,12 +4,33 @@ package raptor.editors;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.*;
-import org.eclipse.ui.part.MultiPageEditorPart;
-import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.forms.editor.FormEditor;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class RaptorEditor extends MultiPageEditorPart implements IResourceChangeListener{
+import forms.FormView;
 
+import raptor.Activator;
+
+public class RaptorEditor extends FormEditor implements IResourceChangeListener{
+  
+  public RaptorEditor() {
+  }
+  
+  
+  /*
+   *  (non-Javadoc)
+   * @see org.eclipse.ui.forms.editor.FormEditor#createToolkit(org.eclipse.swt.widgets.Display)
+   */
+  protected FormToolkit createToolkit(Display display) {
+    // Create a toolkit that shares colors between editors.
+    return new FormToolkit(Activator.getDefault().getFormColors(
+        display));
+  }
+  
   @Override
   public void resourceChanged(IResourceChangeEvent arg0) {
     // TODO Auto-generated method stub
@@ -17,9 +38,15 @@ public class RaptorEditor extends MultiPageEditorPart implements IResourceChange
   }
 
   @Override
-  protected void createPages() {
+  protected void addPages() {
     // TODO Auto-generated method stub
-    
+    try {
+      addPage(new FormView(this));
+      int index = addPage(new Composite(getContainer(), SWT.NULL));
+      
+    } catch (PartInitException e) {
+      // TODO: handle exception
+    }
   }
 
   @Override
@@ -40,6 +67,5 @@ public class RaptorEditor extends MultiPageEditorPart implements IResourceChange
     return false;
   }
 
-  
   
 }

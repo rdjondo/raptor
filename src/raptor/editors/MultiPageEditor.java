@@ -28,6 +28,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FontDialog;
 import org.eclipse.ui.*;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.ide.IDE;
@@ -51,6 +53,10 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 
 	/** The text widget used in page 2. */
 	private StyledText text;
+	
+	private FormToolkit toolkit;
+	private ScrolledForm form;
+	
 	/**
 	 * Creates a multi-page editor example.
 	 */
@@ -115,6 +121,8 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 		int index = addPage(composite);
 		setPageText(index, "Preview");
 	}
+
+	
 	/**
 	 * Creates the pages of the multi-page editor.
 	 */
