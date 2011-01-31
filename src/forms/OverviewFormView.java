@@ -1,6 +1,9 @@
 package forms;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.ui.forms.IManagedForm;
@@ -19,11 +22,12 @@ public class OverviewFormView extends FormPage {
   private FormToolkit toolkit;
   private ScrolledForm form;
   static final public String TITLE = "Raptor - Unit Test Editor";
+  static final public String TITLE_TAB = "Overview";
   /**
    * The constructor.
    */
   public OverviewFormView(FormEditor editor) {
-    super(editor, "second", TITLE);
+    super(editor, "second", TITLE_TAB);
   }
 
   protected void createFormContent(IManagedForm managedForm) {
@@ -50,16 +54,17 @@ public class OverviewFormView extends FormPage {
     Label pathLabel = toolkit.createLabel(parent, "Path: ");
     pathLabel.setLayoutData(td);
     
-    Text utrootpath = toolkit.createText(parent, "Enter root path of the unit test project");
     td = new TableWrapData(TableWrapData.FILL);
+    Text utrootpath = toolkit.createText(parent, "Enter root path of the unit test project (Double click)");
     utrootpath.setLayoutData(td);
+    utrootpath.addMouseListener(new PathFieldContributor(utrootpath,parent.getShell()));
     
     td = new TableWrapData(TableWrapData.FILL);
     Label authorLabel = toolkit.createLabel(parent, "Author: ");
     authorLabel.setLayoutData(td);
     
-    Text author = toolkit.createText(parent, "Enter author the unit test");
     td = new TableWrapData(TableWrapData.FILL);
+    Text author = toolkit.createText(parent, "Enter author the unit test");
     author.setLayoutData(td);
   }
 
