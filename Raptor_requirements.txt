@@ -60,5 +60,51 @@ d) Update problem window for the next step to solve
 *******
 Outputs/Inputs recognition
 *******
+My solution to find a program inputs and outputs is similar to solve an electrical circuit using
+the Superposition theorem.
 
+
+func(*a,*b,*c,d){
+	// Obligatory statements
+	*b = *a;
+	*c = *b + d;
+	if(d>10){ //will be used in Graph 1 only (independant part)
+		*a = *c;
+	} 
+	if( (*a= 2*d ) && *a<5 ){ //will be used in Graph 2 only
+		d = a;
+	}
+	// Obligatory statements
+	return d;
+}
+
+Graph 0
+*a0 -> *b0
+*b0 -> *c0
+ d0 -> *c0
+ d -> decision0
+ d -> *a -> decision1
+ *a -> decision1
+return -> d
+
+Graph 1
+*a0 -> *b0
+*b0 -> *c0
+ d0 -> *c0
+ d -> decision0
+  d -> *a -> decision1
+ *a -> decision1
+*c -> *a1 (increment a's index from a0 to a1 because "a", previously a source, is now used as a destination)
+return -> d
+
+Graph 2
+*a0 -> *b0
+*b0 -> *c0
+ d0 -> *c0
+ d ->  decision0
+ a -> a1*
+ d -> *a -> decision1
+ *a -> decision1
+  a -> d*
+return -> d
 
