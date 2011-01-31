@@ -1,0 +1,64 @@
+The project is an Eclipse plugin.
+
+Using the perl script is painful. Why not creating a wizard that will 
+assist the tester in the harness creation.
+The plugin helps to produce quickly a unit test program
+
+*******
+Scope:
+*******
+A) A UI integrated in Eclipse to assist the unit test creation
+B) A command line interface to enable a batch mode
+
+*******
+Objectives:
+*******
+1. Inputs and Outputs recognition
+The plugin must use the Eclipse AST parser to recognize inputs and outputs.
+Then, the variable type is automatically selected. 
+The header dependencies are easilly solved with dynamic proposition of the headers to include in the harness.
+
+2. The dependencies solving assistance help to create quickly a stub file.
+When variable are structures, the wizard proposes to define sub fields as inputs or as outputs and dynamically include the necessary headers.
+
+3. The plugin can use and create an excel file identical to the perl script.
+
+4. The UT environment is fast and the files are created simultenaously as 
+the plugin wizard is edited.
+
+5. The UT environment accomplishes the same functionnalities as the perl plugin. 
+BUT, the pointers and structure test is actively assisted instead of automatically generated, giving the 
+tester more control.
+
+
+*******
+Scope needs
+*******
+A)
+- The UI is a mix between a wizard UI and navigable forms :  we are going to use 
+A RCP multi-page form editor page, with command pattern that allows undo operations : http://www.eclipse.org/articles/Article-Forms/article.html
+
+- To remain fast the GUI must perform c script generation in background, and only the files needed must be created.
+
+- I must identify different cases of uses to assist the tester
+
+B) the command line interface 
+- Allows batch scripting of the script generation from xml files or xls files.
+- 
+
+*******
+Developpement stages:
+*******
+
+1) Create the UI in respect for priorities:
+a) Select the function to test with CDT assistance (completion) (Tab GENERAL)
+b) Select the root folder to host the unit test files (a short editable list of default folder must be proposed and stored in workspace) (Tab GENERAL)
+c) The function is parsed using AST and the files to determine all inputs and outputs (Tab INPUTS/OUTPUTS)
+d) Update problem window for the next step to solve
+
+
+*******
+Outputs/Inputs recognition
+*******
+
+
