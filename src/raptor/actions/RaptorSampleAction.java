@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
-
+import org.eclipse.cdt.internal.ui.browser.opentype.*;
 /**
  * Our sample action implements workbench action delegate.
  * The action proxy will be created by the workbench and
@@ -33,7 +33,12 @@ public class RaptorSampleAction implements IWorkbenchWindowActionDelegate {
 			window.getShell(),
 			"Raptor",
 			"Hello, Eclipse world");
-		
+		@SuppressWarnings("restriction")
+    ElementSelectionDialog dialog = new ElementSelectionDialog(window.getShell());
+		dialog.setAllowDuplicates(false);
+		dialog.setEmptyListMessage("bla bbla");
+		dialog.setEmptySelectionMessage("noooooo");
+		dialog.create();
 	}
 
 	/**

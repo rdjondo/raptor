@@ -17,6 +17,7 @@ class PathFieldContributor implements MouseListener{
   private Shell shell;
   
   //Forbid usage of default constructor
+  @SuppressWarnings("unused")
   private PathFieldContributor(){};
   public PathFieldContributor(Text text,Shell shell){
     this.text = text;

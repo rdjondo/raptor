@@ -45,5 +45,8 @@
             name="Raptor Multi-page Editor">
       </editor>
    </extension>
+   <extension
+         point="org.eclipse.cdt.ui.quickAssistProcessors">
+   </extension>
 
 </plugin>
