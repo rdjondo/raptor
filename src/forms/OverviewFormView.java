@@ -39,9 +39,9 @@ public class OverviewFormView extends FormPage {
 
     td = new TableWrapData(TableWrapData.FILL);
     //td.colspan = 2;
-    Text unitname = toolkit.createText(parent, "Enter function to test");
-    unitname.setLayoutData(td);
-    
+    TextFunction unitname = TextFunction(toolkit.createText(parent, "Enter function to test"));
+    unitname.getText().setLayoutData(td);
+    unitname.addMouseListener(new FunctionFieldContributor(unitname));
     
     td = new TableWrapData(TableWrapData.FILL);
     Label pathLabel = toolkit.createLabel(parent, "Path: ");
@@ -59,6 +59,11 @@ public class OverviewFormView extends FormPage {
     td = new TableWrapData(TableWrapData.FILL);
     Text author = toolkit.createText(parent, "Enter author the unit test");
     author.setLayoutData(td);
+  }
+
+  private TextFunction TextFunction(Text createText) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   /**

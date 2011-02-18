@@ -1,11 +1,17 @@
 package raptor.actions;
 
+import org.eclipse.cdt.core.CCorePlugin;
+import org.eclipse.cdt.core.index.IIndex;
+import org.eclipse.cdt.core.model.CModelException;
+import org.eclipse.cdt.core.model.CoreModel;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.cdt.internal.ui.browser.opentype.*;
+
 /**
  * Our sample action implements workbench action delegate.
  * The action proxy will be created by the workbench and
@@ -29,25 +35,23 @@ public class RaptorSampleAction implements IWorkbenchWindowActionDelegate {
 	 * @see IWorkbenchWindowActionDelegate#run
 	 */
 	public void run(IAction action) {
-		MessageDialog.openInformation(
-			window.getShell(),
-			"Raptor",
-			"Hello, Eclipse world");
-		@SuppressWarnings("restriction")
-    ElementSelectionDialog dialog = new ElementSelectionDialog(window.getShell());
-		dialog.setAllowDuplicates(false);
-		dialog.setEmptyListMessage("bla bbla");
-		dialog.setEmptySelectionMessage("noooooo");
-		dialog.create();
+//		MessageDialog.openInformation(
+//			window.getShell(),
+//			"Raptor",
+//			"Hello, Eclipse world");
+	  System.out.println("CDT Index request");
+	  GetCIndexJob indexJob = new GetCIndexJob("");
+	  indexJob.setPriority(Job.SHORT);
+	  indexJob.schedule();
 	}
 
-	/**
-	 * Selection in the workbench has been changed. We 
-	 * can change the state of the 'real' action here
-	 * if we want, but this can only happen after 
-	 * the delegate has been created.
-	 * @see IWorkbenchWindowActionDelegate#selectionChanged
-	 */
+  /**
+   * Selection in the workbench has been changed. We can change the state of the
+   * 'real' action here if we want, but this can only happen after the delegate
+   * has been created.
+   * 
+   * @see IWorkbenchWindowActionDelegate#selectionChanged
+   */
 	public void selectionChanged(IAction action, ISelection selection) {
 	}
 
