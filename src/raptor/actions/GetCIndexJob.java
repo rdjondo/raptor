@@ -1,7 +1,7 @@
 package raptor.actions;
 
 import org.eclipse.cdt.core.CCorePlugin;
-import org.eclipse.cdt.core.dom.ast.IBinding;
+import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.index.IIndex;
 import org.eclipse.cdt.core.index.IIndexBinding;
 import org.eclipse.cdt.core.index.IIndexFile;
@@ -23,10 +23,14 @@ public class GetCIndexJob extends Job {
     filter = new IndexFilter() {
       @Override
       public boolean acceptBinding(IBinding binding) throws CoreException {
-        return false;
+        if( binding instanceof IFunction){
+          System.out.println( " ** "+binding.getName() + " ** "  +  " ** " );
+          return true;
+        } else{
+          return false;
+        }
       }
     };
-    // TODO Auto-generated constructor stub
   }
 
   @Override
@@ -49,13 +53,11 @@ public class GetCIndexJob extends Job {
           System.out.println(file.toString());
         }
       } catch (Exception e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       } finally {
         index.releaseReadLock();
       }
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return Status.OK_STATUS;
