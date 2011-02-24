@@ -40,7 +40,7 @@ public class RaptorSampleAction implements IWorkbenchWindowActionDelegate {
 //			"Raptor",
 //			"Hello, Eclipse world");
 	  System.out.println("CDT Index request");
-	  GetCIndexJob indexJob = new GetCIndexJob("");
+	  GetCIndexJob indexJob = new GetCIndexJob("GetCIndexJob to play with Index");
 	  indexJob.setPriority(Job.SHORT);
 	  indexJob.schedule();
 	}

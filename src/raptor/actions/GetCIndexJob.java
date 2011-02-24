@@ -38,6 +38,7 @@ public class GetCIndexJob extends Job {
     try {
       IIndex index = CCorePlugin.getIndexManager().getIndex(
           CoreModel.getDefault().getCModel().getCProjects());
+      if (monitor.isCanceled()) return Status.CANCEL_STATUS;
       try {
         index.acquireReadLock();
         char[] prefixChar = new char[prefix.length()];
