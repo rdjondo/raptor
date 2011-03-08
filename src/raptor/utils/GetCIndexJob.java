@@ -1,4 +1,8 @@
-package raptor.actions;
+package raptor.utils;
+
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.cdt.core.CCorePlugin;
 import org.eclipse.cdt.core.dom.ast.*;
@@ -14,23 +18,41 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
 public class GetCIndexJob extends Job {
+
+  /**
+   * Prefix used to retrieve the functions
+   */
   private String prefix;
+
+  /**
+   * Filter required for filtering the different bindings
+   */
   private IndexFilter filter;
 
-  public GetCIndexJob(String pre) {
+  /**
+   * Contains the list of functions
+   */
+  private static Set<String> bindingSet;
+
+  public GetCIndexJob() {
     super("GetCIndexJob");
-    prefix = pre;
+    bindingSet = new TreeSet<String>();
+    prefix = "";
     filter = new IndexFilter() {
       @Override
       public boolean acceptBinding(IBinding binding) throws CoreException {
-        if( binding instanceof IFunction){
-          System.out.println( " ** "+binding.getName() + " ** "  +  " ** " );
+        if (binding instanceof IFunction) {
+          bindingSet.add(binding.getName());
           return true;
-        } else{
+        } else {
           return false;
         }
       }
     };
+  }
+  
+  public void setPrefix(String prefx){
+    prefix = prefx;
   }
 
   @Override
@@ -49,7 +71,7 @@ public class GetCIndexJob extends Job {
           System.out.println(binding.toString());
         }
         System.out.println("Get getAllFiles");
-        for(IIndexFile file: index.getAllFiles()){
+        for (IIndexFile file : index.getAllFiles()) {
           System.out.println(file.toString());
         }
       } catch (Exception e) {
@@ -63,4 +85,9 @@ public class GetCIndexJob extends Job {
     return Status.OK_STATUS;
 
   }
+  
+  public Set<String> getBindingSet(){
+    return bindingSet;
+  }
+  
 }
