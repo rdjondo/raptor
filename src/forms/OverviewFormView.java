@@ -74,7 +74,7 @@ public class OverviewFormView extends FormPage {
    * Disposes the toolkit
    */
   public void dispose() {
-   toolkit.dispose();
+   if(!toolkit.equals(null)) toolkit.dispose();
    super.dispose();
   }
 

@@ -66,7 +66,7 @@ public class GetCIndexJob extends Job {
         System.out.println("Get getQualifiedName");
         for (IIndexBinding binding : bindings) {
           bindingSet.add(binding.getName());
-          System.out.println(binding.toString());
+          System.out.print(binding.toString()+" ");
         }
         /*
         System.out.println("Get getAllFiles");
