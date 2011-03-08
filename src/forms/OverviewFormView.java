@@ -42,7 +42,8 @@ public class OverviewFormView extends FormPage {
     td = new TableWrapData(TableWrapData.FILL);
     Text unitname = toolkit.createText(parent, "Enter function to test");
     unitname.setLayoutData(td);
-    AutoCompletionTextField.addAutoCompleter(unitname);
+    AutoCompletionTextField autocomp = new AutoCompletionTextField();
+    autocomp.addAutoCompleter(unitname);
     
     td = new TableWrapData(TableWrapData.FILL);
     Label pathLabel = toolkit.createLabel(parent, "Path: ");

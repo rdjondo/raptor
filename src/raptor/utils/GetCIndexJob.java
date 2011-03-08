@@ -1,6 +1,5 @@
 package raptor.utils;
 
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -8,7 +7,6 @@ import org.eclipse.cdt.core.CCorePlugin;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.index.IIndex;
 import org.eclipse.cdt.core.index.IIndexBinding;
-import org.eclipse.cdt.core.index.IIndexFile;
 import org.eclipse.cdt.core.index.IndexFilter;
 import org.eclipse.cdt.core.model.CoreModel;
 import org.eclipse.core.runtime.CoreException;
@@ -22,7 +20,7 @@ public class GetCIndexJob extends Job {
   /**
    * Prefix used to retrieve the functions
    */
-  private String prefix;
+  private String prefix = "";
 
   /**
    * Filter required for filtering the different bindings
@@ -37,12 +35,10 @@ public class GetCIndexJob extends Job {
   public GetCIndexJob() {
     super("GetCIndexJob");
     bindingSet = new TreeSet<String>();
-    prefix = "";
     filter = new IndexFilter() {
       @Override
       public boolean acceptBinding(IBinding binding) throws CoreException {
         if (binding instanceof IFunction) {
-          bindingSet.add(binding.getName());
           return true;
         } else {
           return false;
@@ -69,12 +65,14 @@ public class GetCIndexJob extends Job {
             false, filter, monitor);
         System.out.println("Get getQualifiedName");
         for (IIndexBinding binding : bindings) {
+          bindingSet.add(binding.getName());
           System.out.println(binding.toString());
         }
+        /*
         System.out.println("Get getAllFiles");
         for (IIndexFile file : index.getAllFiles()) {
           System.out.println(file.toString());
-        }
+        }*/
       } catch (Exception e) {
         e.printStackTrace();
       } finally {

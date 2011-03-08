@@ -24,6 +24,8 @@ public class AutoCompletionTextField {
    */
   private final static String KEY_PRESS = "Ctrl+Space";
 
+  private Text text;
+  
   /**
    * This method is used to provide the implementaion of eclipse autocompletion
    * feature. User has to press "CTRL+Space" to see the autocompletion effect.
@@ -34,7 +36,7 @@ public class AutoCompletionTextField {
    *          of type String
    * @author Debadatta Mishra (PIKU)
    */
-  private static void setAutoCompletion(Text text, String prefix,
+  private void setAutoCompletion(String prefix,
       Set<String> proposals) {
     if (prefix.equals(null)) {
       prefix = "";
@@ -58,18 +60,33 @@ public class AutoCompletionTextField {
   /**
    * Method used to create a text field.
    */
-  public static void addAutoCompleter(final Text text) {
+  public void addAutoCompleter(Text txt) {
     // Method for autocompletion
-    final GetCIndexJob indexJob = new GetCIndexJob();
+	text = txt;
+    GetCIndexJob indexJob = new GetCIndexJob();
+    indexJob.setPrefix(text.getText());
     indexJob.setPriority(Job.SHORT);
     indexJob.schedule();
-    setAutoCompletion(text, "", indexJob.getBindingSet());
+    setAutoCompletion("", indexJob.getBindingSet());
+    KeyAdapterText kt = new KeyAdapterText(txt,indexJob);
+    txt.addKeyListener(kt);
+  }
+  
+  private class KeyAdapterText extends KeyAdapter{
+	  Text text;
+	  GetCIndexJob indexJob ;
+	  public KeyAdapterText(Text txt, GetCIndexJob job){
+		  text = txt;
+			indexJob = job;
+		}
 
-    text.addKeyListener(new KeyAdapter() {
-      public void keyReleased(KeyEvent ke) {
-        // Method for autocompletion
-        setAutoCompletion(text, text.getText(), indexJob.getBindingSet());
-      }
-    });
+		public void keyReleased(KeyEvent ke) {
+			// Method for autocompletion
+			indexJob.setPrefix(text.getText());
+			indexJob.setPriority(Job.SHORT);
+			indexJob.schedule();
+			setAutoCompletion(text.getText(), indexJob.getBindingSet());
+		}
+
   }
 }
