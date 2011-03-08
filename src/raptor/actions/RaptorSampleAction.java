@@ -12,6 +12,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
 
+import raptor.utils.GetCIndexJob;
+
 /**
  * Our sample action implements workbench action delegate.
  * The action proxy will be created by the workbench and
@@ -40,7 +42,7 @@ public class RaptorSampleAction implements IWorkbenchWindowActionDelegate {
 //			"Raptor",
 //			"Hello, Eclipse world");
 	  System.out.println("CDT Index request");
-	  GetCIndexJob indexJob = new GetCIndexJob("GetCIndexJob to play with Index");
+	  GetCIndexJob indexJob = new GetCIndexJob();
 	  indexJob.setPriority(Job.SHORT);
 	  indexJob.schedule();
 	}

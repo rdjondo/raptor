@@ -9,6 +9,8 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
 
+import raptor.utils.AutoCompletionTextField;
+
 
 public class OverviewFormView extends FormPage {
 
@@ -38,10 +40,9 @@ public class OverviewFormView extends FormPage {
     unitLabel.setLayoutData(td);
 
     td = new TableWrapData(TableWrapData.FILL);
-    //td.colspan = 2;
-    TextFunction unitname = TextFunction(toolkit.createText(parent, "Enter function to test"));
-    unitname.getText().setLayoutData(td);
-    unitname.addMouseListener(new FunctionFieldContributor(unitname));
+    Text unitname = toolkit.createText(parent, "Enter function to test");
+    unitname.setLayoutData(td);
+    AutoCompletionTextField.addAutoCompleter(unitname);
     
     td = new TableWrapData(TableWrapData.FILL);
     Label pathLabel = toolkit.createLabel(parent, "Path: ");
@@ -59,11 +60,6 @@ public class OverviewFormView extends FormPage {
     td = new TableWrapData(TableWrapData.FILL);
     Text author = toolkit.createText(parent, "Enter author the unit test");
     author.setLayoutData(td);
-  }
-
-  private TextFunction TextFunction(Text createText) {
-    // TODO Auto-generated method stub
-    return null;
   }
 
   /**
