@@ -60,13 +60,15 @@ public class GetCIndexJob extends Job {
       try {
         index.acquireReadLock();
         char[] prefixChar = new char[prefix.length()];
+        
+        /*Copy prefix String to prefixChar array*/
         prefix.getChars(0, prefix.length(), prefixChar, 0);
+        
         IIndexBinding[] bindings = index.findBindingsForPrefix(prefixChar,
             false, filter, monitor);
         System.out.println("Get getQualifiedName");
         for (IIndexBinding binding : bindings) {
           bindingSet.add(binding.getName());
-          System.out.print(binding.toString()+" ");
         }
         /*
         System.out.println("Get getAllFiles");
